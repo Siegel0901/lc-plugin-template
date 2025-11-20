@@ -8,6 +8,7 @@ target/
 *.iws
 *.iml
 *.ipr
+/src/main/java/leetcode/editor/cn/doc/submission/*
 
 ### Eclipse ###
 .apt_generated
