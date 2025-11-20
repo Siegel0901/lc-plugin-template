@@ -3,6 +3,8 @@ package leetcode.editor.cn;
 public class DesignLinkedList {
 
     //leetcode submit region begin(Prohibit modification and deletion)
+/*
+    // 动态数组代码实现
     class MyLinkedList {
         private int[] data;
         private int size;
@@ -83,6 +85,245 @@ public class DesignLinkedList {
         }
 
     }
+*/
+/*    // 单链表代码实现(带头尾结点)
+    class MyLinkedList {
+        public static class Node {
+            private Integer val;
+            private Node next;
+
+            Node() {
+                this(null);
+            }
+
+            Node(Integer val) {
+                this.val = val;
+                this.next = null;
+            }
+        }
+
+        private Node dummyHead;
+        private Node dummyTail;
+        private int size;
+
+        public MyLinkedList() {
+            this.dummyHead = new Node();
+            this.dummyTail = new Node();
+            this.dummyHead.next = dummyTail;
+            this.size = 0;
+        }
+
+        private Node insert(Node prev, int val) {
+            Node next = prev.next;
+            Node node = new Node(val);
+            node.next = next;
+            prev.next = node;
+            return node;
+        }
+
+        private Node del(Node prev) {
+            Node d = prev.next;
+            prev.next = d.next;
+            return d;
+        }
+
+        public int get(int index) {
+            if (checkDeleteIndex(index))
+                return -1;
+            Node prevNode = getPrevNode(index);
+            return prevNode.next.val;
+        }
+
+        public void addAtHead(int val) {
+            insert(dummyHead, val);
+            size++;
+        }
+
+        public void addAtTail(int val) {
+            Node p = dummyHead;
+            while (p.next != dummyTail) {
+                p = p.next;
+            }
+            insert(p, val);
+            size++;
+        }
+
+        public void addAtIndex(int index, int val) {
+            if (checkAddIndex(index))
+                return;
+            insert(getPrevNode(index), val);
+            size++;
+        }
+
+        public void deleteAtIndex(int index) {
+            if (checkDeleteIndex(index))
+                return;
+            del(getPrevNode(index));
+            size--;
+        }
+
+        public void deleteAtHead() {
+            if (isEmpty()) return;
+            del(dummyHead);
+            size--;
+        }
+
+        public void deleteAtTail() {
+            if (isEmpty()) return;
+            Node prev = dummyHead;
+            while (prev.next != dummyTail) {
+                prev = prev.next;
+            }
+            del(prev);
+            size--;
+        }
+
+        public int size() {
+            return size;
+        }
+
+        public boolean isEmpty() {
+            return size == 0;
+        }
+
+        private Node getPrevNode(int index) {
+            Node p = dummyHead;
+            int position = -1;
+            while (p.next != dummyTail) {
+                if (position == index - 1)
+                    break;
+                p = p.next;
+                position++;
+            }
+            return p;
+        }
+
+        private boolean checkDeleteIndex(int index) {
+            return index < 0 || index >= size;
+        }
+
+        private boolean checkAddIndex(int index) {
+            return index < 0 || index > size;
+        }
+
+    }*/
+    // 双链表代码实现(带头尾结点)
+    class MyLinkedList {
+        public static class Node {
+            private Integer val;
+            private Node next;
+            private Node prev;
+
+            Node() {
+                this(null);
+            }
+
+            Node(Integer val) {
+                this.val = val;
+                this.next = null;
+                this.prev = null;
+            }
+        }
+
+        private Node dummyHead;
+        private Node dummyTail;
+        private int size;
+
+        public MyLinkedList() {
+            this.dummyHead = new Node();
+            this.dummyTail = new Node();
+            this.dummyHead.next = dummyTail;
+            this.dummyTail.prev = dummyHead;
+            this.size = 0;
+        }
+
+        private Node insert(Node prev, int val) {
+            Node next = prev.next;
+            Node node = new Node(val);
+            node.next = next;
+            next.prev = node;
+            node.prev = prev;
+            prev.next = node;
+            return node;
+        }
+
+        private Node del(Node prev) {
+            Node d = prev.next;
+            Node next = d.next;
+            prev.next = next;
+            next.prev = prev;
+            return d;
+        }
+
+        public int get(int index) {
+            if (checkDeleteIndex(index)) return -1;
+            Node prev = getPrevNode(index);
+            return prev.next.val;
+        }
+
+        public void addAtHead(int val) {
+            insert(dummyHead, val);
+            size++;
+        }
+
+        public void addAtTail(int val) {
+            insert(dummyTail.prev, val);
+            size++;
+        }
+
+        public void addAtIndex(int index, int val) {
+            if (checkAddIndex(index)) return;
+            insert(getPrevNode(index), val);
+            size++;
+        }
+
+        public void deleteAtIndex(int index) {
+            if (checkDeleteIndex(index)) return;
+            del(getPrevNode(index));
+            size--;
+        }
+
+        public void deleteAtHead(){
+            if (isEmpty()) return;
+            del(dummyHead);
+            size--;
+        }
+
+        public void deleteAtTail(){
+            if (isEmpty()) return;
+            del(dummyTail.prev);
+            size--;
+        }
+
+        public int size() {
+            return size;
+        }
+
+        public boolean isEmpty() {
+            return size == 0;
+        }
+
+        private Node getPrevNode(int index) {
+            Node p = dummyHead;
+            int position = -1;
+            while (p.next != dummyTail) {
+                if (position == index - 1) break;
+                p = p.next;
+                position++;
+            }
+            return p;
+        }
+
+        private boolean checkDeleteIndex(int index) {
+            return index < 0 || index >= size;
+        }
+
+        private boolean checkAddIndex(int index) {
+            return index < 0 || index > size;
+        }
+
+    }
+
 
     /**
      * Your MyLinkedList object will be instantiated and called as such:
