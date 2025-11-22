@@ -8,7 +8,6 @@ import java.util.Queue;
 public class NAryTreeLevelOrderTraversal {
 
     //leetcode submit region begin(Prohibit modification and deletion)
-/*
     // Definition for a Node.
     class Node {
         public int val;
@@ -26,7 +25,6 @@ public class NAryTreeLevelOrderTraversal {
             children = _children;
         }
     }
-*/
 
     class Solution {
         public List<List<Integer>> levelOrder(Node root) {

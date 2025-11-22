@@ -6,7 +6,7 @@ import java.util.List;
 public class NAryTreePreorderTraversal {
 
     //leetcode submit region begin(Prohibit modification and deletion)
-/*
+
     // Definition for a Node.
     class Node {
         public int val;
@@ -24,7 +24,7 @@ public class NAryTreePreorderTraversal {
             children = _children;
         }
     }
-*/
+
 
     class Solution {
         private final List<Integer> preorder = new ArrayList<>();
