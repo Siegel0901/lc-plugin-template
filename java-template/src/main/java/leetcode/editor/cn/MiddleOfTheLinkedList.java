@@ -19,6 +19,15 @@ public class MiddleOfTheLinkedList {
      * }
      */
     class Solution {
+        /**
+         * 思路：快慢指针
+         *  1. 若链表长度为偶数，则fast为null时，slow走到中间节点两个节点的第二个节点
+         *  2. 若链表长度为奇数，则fast走到链表尾，fast.next为null时，slow走到中间节点
+         * 时间复杂度：O(n)
+         * 空间复杂度：O(1)
+         * @param head 链表头节点
+         * @return 中间节点
+         */
         public ListNode middleNode(ListNode head) {
             ListNode fast = head;
             ListNode slow = head;
