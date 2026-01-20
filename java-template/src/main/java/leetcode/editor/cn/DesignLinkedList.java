@@ -88,7 +88,7 @@ public class DesignLinkedList {
 */
 /*    // 单链表代码实现(带头尾结点)
     class MyLinkedList {
-        public static class Node {
+        public class Node {
             private Integer val;
             private Node next;
 
@@ -209,7 +209,7 @@ public class DesignLinkedList {
     }*/
     // 双链表代码实现(带头尾结点)
     class MyLinkedList {
-        public static class Node {
+        public class Node {
             private Integer val;
             private Node next;
             private Node prev;
