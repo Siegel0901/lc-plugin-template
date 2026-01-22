@@ -1,8 +1,6 @@
 package leetcode.editor.cn;
 
-import java.util.*;
-
-import leetcode.editor.common.*;
+import leetcode.editor.common.ListNode;
 
 public class ReverseLinkedList {
 
@@ -113,6 +111,13 @@ public class ReverseLinkedList {
          * 思路四:分解子问题递归实现
          * 1. 把翻转head分解为翻转head.next，最后插入head得到
          * 2. 递归边界：head为null或head.next为null
+         * 3. 函数返回翻转链表的头节点，翻转链表的尾节点即为head.next
+         * 例子：
+         * 1 -> 2 -> 3 -> null
+         * 1 -> reverseList(2 -> 3 -> null)
+         * 1[head] -> (2[head.next] <- 3[reversedHead]) {2[head.next] -> null[head.next.next]}
+         * 1[head] <- 2[head.next] <- 3[reversedHead] {head.next.next = head}
+         * null <- 1[head] <- 2 <- 3[reversedHead] {head.next = null}
          * 时间复杂度：O(n)
          * 空间复杂度：O(n)
          *
@@ -120,11 +125,17 @@ public class ReverseLinkedList {
          * @return 新链表头结点
          */
         public ListNode reverseList(ListNode head) {
+            // 链表为空或只有一个节点
             if (head == null || head.next == null)
                 return head;
-            ListNode tail = reverseList(head.next);
-            // TODO
-            return tail;
+            // 将以head.next为首的链表翻转，得到翻转链表的头节点
+            ListNode reversedHead = reverseList(head.next);
+            // head.next即为翻转链表的尾节点，插入head
+            head.next.next = head;
+            // 此时head作为尾节点，需要将head.next置为null
+            head.next = null;
+            // 返回翻转链表的头节点
+            return reversedHead;
         }
 
     }
