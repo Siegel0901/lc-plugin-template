@@ -8,12 +8,12 @@ public class PeekingIterator {
     // Java Iterator interface reference:
     // https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html
 
-    class PeekingIterator implements Iterator<Integer> {
+    class PeekingIterator1 implements Iterator<Integer> {
         private Iterator<Integer> iter;
         // 缓存迭代器中的下一个元素
         private Integer nextElem;
 
-        public PeekingIterator(Iterator<Integer> iterator) {
+        public PeekingIterator1(Iterator<Integer> iterator) {
             // initialize any member here.
             iter = iterator;
             nextElem = iterator.next();

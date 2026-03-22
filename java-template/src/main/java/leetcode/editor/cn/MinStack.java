@@ -11,11 +11,11 @@ public class MinStack {
      * 思路二：新增最小栈
      * 1. 维护最小栈，最小栈中的每个元素表示原始栈中元素作为栈顶时的最小元素
      */
-    class MinStack {
+    class MinStack2 {
         Deque<Integer> stk;
         Deque<Integer> minStk;
 
-        public MinStack() {
+        public MinStack2() {
             stk = new ArrayDeque<>();
             minStk = new ArrayDeque<>();
         }
