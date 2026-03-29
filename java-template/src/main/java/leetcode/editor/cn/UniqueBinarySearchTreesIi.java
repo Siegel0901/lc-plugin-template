@@ -27,12 +27,12 @@ public class UniqueBinarySearchTreesIi {
     class Solution {
         public List<TreeNode> generateTrees(int n) {
             // 初始化备忘录
-            meno = new ArrayList[n + 1][n + 1];
+            memo = new ArrayList[n + 1][n + 1];
             return build(1, n);
         }
 
         // 备忘录
-        List<TreeNode>[][] meno;
+        List<TreeNode>[][] memo;
 
         // 返回[start,end]组成的互不相同的不同BST
         List<TreeNode> build(int start, int end) {
@@ -45,8 +45,8 @@ public class UniqueBinarySearchTreesIi {
             }
 
             // 查备忘录
-            if (meno[start][end] != null)
-                return meno[start][end];
+            if (memo[start][end] != null)
+                return memo[start][end];
 
             // [start, end]范围内的每个整数都有可能做根节点
             for (int i = start; i <= end; i++) {
@@ -66,7 +66,7 @@ public class UniqueBinarySearchTreesIi {
             }
 
             // 存入备忘录
-            meno[start][end] = res;
+            memo[start][end] = res;
 
             return res;
         }

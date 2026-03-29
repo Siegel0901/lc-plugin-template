@@ -13,19 +13,19 @@ public class UniqueBinarySearchTrees {
          */
         public int numTrees(int n) {
             // 初始化备忘录
-            meno = new int[n + 1][n + 1];
+            memo = new int[n + 1][n + 1];
             return count(1, n);
         }
 
         // 备忘录
-        int[][] meno;
+        int[][] memo;
 
         int count(int start, int end) {
             if (start > end)
                 return 1;
             // 查备忘录
-            if (meno[start][end] != 0)
-                return meno[start][end];
+            if (memo[start][end] != 0)
+                return memo[start][end];
             int res = 0;
             // 遍历1~n，让每个数都作为根节点
             for (int i = start; i <= end; i++) {
@@ -37,7 +37,7 @@ public class UniqueBinarySearchTrees {
                 res += left * right;
             }
             // 写备忘录
-            meno[start][end] = res;
+            memo[start][end] = res;
             return res;
         }
     }
