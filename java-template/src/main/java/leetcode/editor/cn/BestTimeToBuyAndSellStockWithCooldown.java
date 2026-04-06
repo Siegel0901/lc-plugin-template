@@ -1,0 +1,52 @@
+package leetcode.editor.cn;
+
+public class BestTimeToBuyAndSellStockWithCooldown {
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * 1. 定义状态：
+     * 1.1. 状态1: 天数i, i∈[0,n], n为prices.length, i==0表示还没有开始，i==1表示第1天，股票价格为prices[i-1]
+     * 1.2. 状态2: 最大买入次数k, k∈[0,K], K为题目限制条件买入次数上限
+     * 1.3. 状态3: 当前股票持有状态j, j∈[0,1], 0表示未持有,1表示持有
+     * 2. base case:
+     * 2.1. dp[0][..][0] = 0,           第0天还没开始卖股票，且未持有股票，利润为0
+     * 2.2. dp[0][..][1] = -infinity,   第0天还没开始卖股票，且持有股票，不可能有利润，题目求大最值，这里设为最小值
+     * 2.3. dp[..][0][0] = 0,           k==0，买入次数上限为0，不可能买入任何股票，利润为0
+     * 2.4. dp[..][0][1] = -infinity,   k==0，买入次数上限为0，不可能持有股票，不可能有利润
+     * 3. 状态转移方程：根据今天是否持有股票转移状态
+     * 3.1. dp[i][k][0] = max(dp[i-1][k][0],dp[i-1][k][1]+prices[i-1]) 今天未持有股票的最大利润 = max(昨天未持有，昨天持有今天卖出)
+     * 3.2. dp[i][k][1] = max(dp[i-1][k][1],dp[i-1][k-1][0]-prices[i-1]) 今天持有股票的最大利润 = max(昨天持有，昨天未持有今天买入)
+     * 注意：今天最大买入k次的限制依赖昨天最大买入k-1次的限制，因为今天如果是要买入，昨天的k-1次最大买入可能都买了，则最大买入次数需要+1
+     * 此题等于没有k的限制，去掉状态k
+     */
+    class Solution {
+        public int maxProfit(int[] prices) {
+            int n = prices.length;
+            int[][] dp = new int[n + 1][2];
+            // base case
+            dp[0][1] = Integer.MIN_VALUE;
+            // i-2=-1,即i=1时,对dp[i-2][0]单独处理，第1天持有股票即第一天买股票
+//            dp[1][0] = Math.max(dp[0][0], dp[0][1] + prices[0]);
+//            dp[1][1] = Math.max(dp[0][1], -prices[0]);
+            dp[1][0] = 0;
+            dp[1][1] = -prices[0];
+            // i从2开始
+            for (int i = 2; i <= n; i++) {
+                dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i - 1]);
+                // dp[i - 2][0]表示卖出股票未持有股票那一天，dp[i - 1][0]表示冷却期那一天
+                dp[i][1] = Math.max(dp[i - 1][1], dp[i - 2][0] - prices[i - 1]);
+            }
+            // dp[n][k][0]（不持有）一定比dp[n][k][1]（持有）大
+            return dp[n][0];
+        }
+    }
+    //leetcode submit region end(Prohibit modification and deletion)
+
+
+    public static void main(String[] args) {
+        Solution solution = new BestTimeToBuyAndSellStockWithCooldown().new Solution();
+        // put your test code here
+
+    }
+}
