@@ -59,7 +59,7 @@ public class RandomPickWithWeight {
      */
     //leetcode submit region end(Prohibit modification and deletion)
     public static void main(String[] args) {
-        Solution solution = new RandomPickWithWeight().new Solution();
+//        Solution solution = new RandomPickWithWeight().new Solution();
         // put your test code here
 
     }

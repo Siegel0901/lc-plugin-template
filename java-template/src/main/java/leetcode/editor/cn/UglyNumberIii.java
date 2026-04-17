@@ -62,7 +62,7 @@ public class UglyNumberIii {
      * 空间复杂度：O(1)
      * 【Time Limit Exceeded】
      * */
-    class Solution {
+    class Solution2 {
         public int nthUglyNumber(int n, int a, int b, int c) {
             // 丑数倍数链表当前节点的值
             long producta = a, productb = b, productc = c;
